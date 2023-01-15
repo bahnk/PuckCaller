@@ -1,0 +1,11 @@
+#!/bin/sh
+
+module load matlab/R2019a
+
+if [[ ! -d bin ]]
+then
+	mkdir bin
+fi
+
+time mcc -m PuckCaller.m -d ./bin/ -o PuckCaller
+
