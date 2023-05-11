@@ -43,7 +43,7 @@ def mergeMaps(item) {//
 def getInfoFromTif(filename) {//
 ////////////////////////////////
 
-	def regex = "220609_ligation_(\\d+)_MMStack_Pos(\\d+).ome.tif"
+	def regex = params.date + "_ligation_(\\d+)_MMStack_Pos(\\d+).ome.tif"
 
 	def ligation = filename.replaceAll(regex, "\$1")
 	def position = filename.replaceAll(regex, "\$2")
@@ -117,17 +117,11 @@ include { report } from "./modules/process/quality_control"
 ///////////////////////////////////////////////////////////////////////////////
 //// INPUT ////////////////////////////////////////////////////////////////////
 
-regex = "220609_ligation*_MMStack_Pos*.ome.tif"
+regex = params.date + "_ligation*_MMStack_Pos*.ome.tif"
 
 Channel
 	.fromPath( Paths.get(params.directory, regex ) )
 	.map{[ getInfoFromTif(it.getFileName().toString()) , it ]}
-	.filter{ it[0]["puck"] != "19" }
-	//.filter{ it[0]["puck"] == "22" }
-	//.filter{
-	//	it[0]["puck"] == "0" || 
-	//	it[0]["puck"] == "10"
-	// }
 	.set{ TIFFS }
 
 ///////////////////////////////////////////////////////////////////////////////
