@@ -18,7 +18,7 @@ So, the files need to be named in a certain for that to work.
 For example, a file can be named the following way:
 
 ```
-221012\_ligation\_1\_MMStack\_Pos0.ome.tif
+221012_ligation_1_MMStack_Pos0.ome.tif
 ```
 
 The pattern recognized by the pipeline is the following:
@@ -40,27 +40,32 @@ A typical parameter file should look like that:
 ```
 date: "221012"
 slices: 11
-directory: renamed\_data
+directory: renamed_data
 order: order.csv
-out\_directory: pucks
+out_directory: pucks
 ```
 
 It is a `YAML` file whose entries are the following:
 
  * `date`: run's date as in TIFF file names (`YYMMDD`)
- * `slices`: number of z position in TIFF files
+ * `slices`: number of z positions in TIFF files
  * `directory`: path of directory containing TIFF files
  * `order`: path to ligation order file
- * `out\_directory`: path of output directory for the pipeline
+ * `out_directory`: path of output directory for the pipeline
 
 ## Ligation order file
 
 The `order.csv` file specifies the way `TIFF` files are organized.
 It is used to trace back the base order from the ligation order.
-It needs to contain 4 columns:
+Each ligation is peformed with a primer that corresponds to a base:
+
+![Primers](doc/primers.png)
+
+The order of the primers can vary so this needs to be recorded in the `order.csv` file.
+The file needs to contain 4 columns:
 
  * `ligation`: ligation number contained in the `TIFF` file names
- * `primer`: primer used for the current ligation (needs to be among: T+3, UP+3, UP+4, T-1, T, T+1, T+2, UP-1, UP, UP+1, UP+2, 3UP-1, 3UP, 3UP+1)
+ * `primer`: primer used for the current ligation (needs to be among: `T+3`, `UP+3`, `UP+4`, `T-1`, `T`, `T+1`, `T+2`, `UP-1`, `UP`, `UP+1`, `UP+2`, `3UP-1`, `3UP`, `3UP+1`)
  * `base`: base number the current ligation sequences
  * `order`: same as base column
 
@@ -109,9 +114,9 @@ Modify the parameters file, for example:
 ```
 date: "221012"
 slices: 11
-directory: renamed\_data
+directory: renamed_data
 order: order.csv
-out\_directory: pucks
+out_directory: pucks
 ```
 
 Run the pipeline:
