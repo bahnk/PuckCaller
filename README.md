@@ -83,7 +83,7 @@ Get the code of the pipeline
 git clone git@github.com:bahnk/PuckCaller.git <DIRECTORY>
 ```
 
-If you're on NEMO, you need to change `runOptions = "-B /camp"` to `runOptions = "-B /nemo" in the `nextflow.config` file.
+If you're on NEMO, you need to change `runOptions = "-B /camp"` to `runOptions = "-B /nemo"` in the `nextflow.config` file.
 Then, go to the directory:
 
 ```
